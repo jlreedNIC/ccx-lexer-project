@@ -1,3 +1,12 @@
+/**
+ * @file main.cpp
+ * @author Jordan Reed
+ * @brief Start of Lexical Analyzer program.
+ *        Program currently takes a file given through the command line and copies
+ *        the contents to a new file, with .lexer.out appended to the file name.
+ * 
+ */
+
 #include <iostream>
 #include <fstream>
 #include <string>
