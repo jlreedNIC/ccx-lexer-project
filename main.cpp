@@ -19,6 +19,11 @@ int main(int argc, char **argv)
         std::cerr << "Can't handle more than one file at a time.\n";
         exit(1);
     }
+    if(argc < 1)
+    {
+        std::cerr << "Please enter a filename.\n";
+        exit(1);
+    }
 
     // file to open, taken from command line
     std::string fileName = argv[1];
@@ -54,16 +59,20 @@ int main(int argc, char **argv)
         // check for comments
         if(dummyString[0] == '/' && dummyString[1] == '*')
         {
+            // ignore next /n
+            inFile.ignore();
             // comment found
             do
             {
                 // store comment in place holder until end of comment is found
-                placeHolder += dummyString + "\n";
+                placeHolder += dummyString + '\n';
+                // get next line of comment
                 getline(inFile, dummyString);
+                // check to see if end of comment is found
                 size = dummyString.length();
-
             } while (dummyString[size-1] != '/' && dummyString[size-2] != '*');
 
+            // reset placeHolder and output dummyString
             placeHolder += dummyString;
             dummyString = placeHolder;
             placeHolder = "";
