@@ -43,14 +43,38 @@ int main(int argc, char **argv)
 
     // loop through input file and put into output file
     std::string dummyString = "";
+    std::string placeHolder = "";
+    int size = 0;
     while(!inFile.eof())
     {
         // TO DO: find better way for reading from file. 
         // read from input file
-        getline(inFile, dummyString);
+        inFile >> dummyString;
 
-        // output to new file
-        outFile << dummyString << "\n";
+        // check for comments
+        if(dummyString[0] == '/' && dummyString[1] == '*')
+        {
+            // comment found
+            do
+            {
+                // store comment in place holder until end of comment is found
+                placeHolder += dummyString + "\n";
+                getline(inFile, dummyString);
+                size = dummyString.length();
+
+            } while (dummyString[size-1] != '/' && dummyString[size-2] != '*');
+
+            placeHolder += dummyString;
+            dummyString = placeHolder;
+            placeHolder = "";
+            // output comment to file
+            outFile << dummyString << " (comment) \n";
+        }
+        else
+        {
+            // output to new file
+            outFile << dummyString << "\n"; 
+        }  
     }
 
     // close files
