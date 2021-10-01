@@ -1,5 +1,5 @@
-#ifndef STUDENT_H
-#define STUDENT_H
+#ifndef PARSER_H
+#define PARSER_H
 
 #include <iostream>
 #include <fstream>
@@ -13,11 +13,18 @@ class Parser
         Parser(const std::string &fileName);    // constructor with file name
         ~Parser();                              // default destructor
 
-
+        void parse();               // main parsing function
+        void getChars();            // gets next char and one after
+        void outputLexeme();        // outputs lexeme and token to out file
 
     private:
         std::string token;
-        char nextChar;
+        std::string lexeme;
+        char nextChar;          // next char
+        char secondChar;        // next next char
+
+        std::fstream inFile;
+        std::fstream outFile;
 };
 
 
