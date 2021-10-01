@@ -52,7 +52,7 @@ systems, the requirements for most lexers (and for this assignment) are very sim
 
 Your lexer shall open a file provided on the command-line, discover the lexemes
 found in the file, classify each lexeme, and print out each lexeme and its classification to the
-output file named with the same name as the input file with “.lexer” as the last part of the name.
+output file named with the same name as the input file with “.lexer.out” as the last part of the name.
 Your lexer shall classify each lexeme found in a given source file into one of 8 categories.
 
 These categories are:
@@ -129,60 +129,68 @@ bracket the lexeme in quotes or any other characters.
 ## The Lexeme Categories
 As mentioned, your lexer shall classify each lexeme encountered into one of 8 categories.
 The details of each category follow.
-* comment
-Comments in CCX begin with /* and end with */ (C-style comments). Comments can span
-multiple lines. Everything encountered between (and including) the /* and */ delimiters is
-considered part of the comment lexeme.
-* identifier
-Identifiers are used in programs to name entities such as variables. Every programming language
-has its own rules as to what constitutes a legal identifier. In CCX an identifier can be composed
-of letters, digits, and underscores, but must start with a letter. You may assume that your lexer
-will never encounter an identifier that is more than 256 characters long.
-*string
-Strings in CCX are literals delimited by double-quotes "like this". The double-quotes are part of
-the lexeme. When you print a lexeme that has been classified as a string, you must print the
-double-quotes. You may assume that your lexer will never encounter a string that is more than
-256 characters long.  
-* keyword
-CCX contains many keywords. Keywords are sometimes called reserved words. Keywords (like
-all of CCX) are case-sensitive, and may not be used as identifiers in legal programs. It is not the
-job of the lexer to determine whether a keyword is misused; the lexer simply classifies a
-particular lexeme as being a keyword.
-The following are the list of CCX keywords that your lexer must recognize:
-```
-accessor and array begin bool case character constant else elsif
-end exit function if in integer interface is loop module mutator
-natural null of or others out positive procedure range return
-struct subtype then type when while
-```
-* character literal
-Character literals in CCX are literals in single-quotes like this: 'x'. CCX allows character escape
-sequences in character literals, such as '\020' but your lexer need not support this.
-* operator
-CCX contains many operators. Some operators consist of a single character, whereas others
-contain multiple characters. The following is a list of the operators that your lexer must
-recognize.
-Each operator is enclosed in double-quotes for the purpose of disambiguation, but these doublequotes are not part of the operator:
-"." "<" ">" "(" ")" "+" "-" "*" "/" "|" "&" ";" ","
-":" "[" "]" "=" ":=" ".." "<<" ">>" "<>" "<=" ">="
-"**" "!=" "=>"
-* numeric literal
-CCX allows numeric literals in multiple forms. Your lexer will recognize a simplified subset of
-CCX numeric literals. Each numeric literal encountered by your lexer will start with a decimal
-digit and will contain only the following:
-- decimal digits (0 through 9)
-- hexadecimal digits (A through F and/or a through f)
-- the special characters ’ ’, ’.’, and ’#’.
-any other character encountered will denote that the numeric literal has ended, and a new lexeme
-has begun.
-* UNK
-This special category is set aside for lexemes that your lexer cannot classify, and is intended to
-assist you in building and debugging your lexer. This category is composed of all lexemes that
-do not fit in any of the other specified categories. Your lexer will only be tested against legal
-CCX programs, so if the logic in your lexer is correct, you should never encounter an UNK
-lexeme. If, however, your lexer does encounter a lexeme that does not fit the requirements of any
-of the other categories, your lexer must print the offending lexeme, along with its category name
-in parenthesis, and immediately terminate.
+* __comment__
+
+  Comments in CCX begin with /\* and end with \*/ (C-style comments). Comments can span
+  multiple lines. Everything encountered between (and including) the /\* and \*/ delimiters is
+  considered part of the comment lexeme.
+
+* __identifier__
+  
+  Identifiers are used in programs to name entities such as variables. Every programming language
+  has its own rules as to what constitutes a legal identifier. In CCX an identifier can be composed
+  of letters, digits, and underscores, but must start with a letter. You may assume that your lexer
+  will never encounter an identifier that is more than 256 characters long.
+* __string__
+  
+  Strings in CCX are literals delimited by double-quotes "like this". The double-quotes are part of
+  the lexeme. When you print a lexeme that has been classified as a string, you must print the
+  double-quotes. You may assume that your lexer will never encounter a string that is more than
+  256 characters long.  
+* __keyword__
+  
+  CCX contains many keywords. Keywords are sometimes called reserved words. Keywords (like
+  all of CCX) are case-sensitive, and may not be used as identifiers in legal programs. It is not the
+  job of the lexer to determine whether a keyword is misused; the lexer simply classifies a
+  particular lexeme as being a keyword.
+  The following are the list of CCX keywords that your lexer must recognize:
+  ```
+  accessor and array begin bool case character constant else elsif
+  end exit function if in integer interface is loop module mutator
+  natural null of or others out positive procedure range return
+  struct subtype then type when while
+  ```
+* __character literal__
+  
+  Character literals in CCX are literals in single-quotes like this: 'x'. CCX allows character escape
+  sequences in character literals, such as '\020' but your lexer need not support this.
+* __operator__
+  
+  CCX contains many operators. Some operators consist of a single character, whereas others
+  contain multiple characters. The following is a list of the operators that your lexer must
+  recognize.
+  Each operator is enclosed in double-quotes for the purpose of disambiguation, but these double quotes are not part of the operator:
+  ".", "<", ">", "(", ")", "+", "-", "\*", "/", "|", "&", ";", ",", ":", "[", "]", "=", ":=", "..", "<<", ">>", "<>", "<=", ">=",
+  "\*\*", "!=", and "=>".
+* __numeric literal__
+  
+  CCX allows numeric literals in multiple forms. Your lexer will recognize a simplified subset of
+  CCX numeric literals. Each numeric literal encountered by your lexer will start with a decimal
+  digit and will contain only the following:
+  - decimal digits (0 through 9)
+  - hexadecimal digits (A through F and/or a through f)
+  - the special characters ’ ’, ’.’, and ’#’
+  - any other character encountered will denote that the numeric literal has ended, and a new lexeme has begun.
+
+* __unknown__
+  
+  This special category is set aside for lexemes that your lexer cannot classify, and is intended to
+  assist you in building and debugging your lexer. This category is composed of all lexemes that
+  do not fit in any of the other specified categories. Your lexer will only be tested against legal
+  CCX programs, so if the logic in your lexer is correct, you should never encounter an UNK
+  lexeme. If, however, your lexer does encounter a lexeme that does not fit the requirements of any
+  of the other categories, your lexer must print the offending lexeme, along with its category name
+  in parenthesis, and immediately terminate.
 
 *Note that length assumptions are dangerous from a cyber security standpoint
 and should never be an acceptable practice in production code.*
@@ -243,7 +251,7 @@ list.cci and the implementation was placed in a file called list.ccx.
 [ccx/list.ccx.lexer.out](ccx/list.ccx.lexer.out) list-sample-output) shows the output produced by a lexer when scanning the source code shown above.
 
 ### Grading
-Your lexer will be built using a Makefile and Ubuntu tools as installed on NIC lab laptops.
+Your lexer will be built using a Makefile and Ubuntu tools as installed on NIC lab laptops. 
 You will test your lexer against the input files listed in [Figure 7](#figure-7-test-source-files):
 
 #### Figure 7 Test Source Files
@@ -263,16 +271,11 @@ widget.cci
 widget.ccx
 ```
 
-Each of these source files and the result produced by a correct lexer when scanning the file is
-available on the course website. The output of your lexer will be compared with the correct result
-for each file. If your lexer produces correct results for each of the files listed above, you will earn
+Each of these source files and the result produced by a correct lexer when scanning the file is available in the github assignment. You will need to compare the output of your lexer with the reference files using diff. If your lexer produces correct results for each of the files listed above, you will earn
 100% of the total possible points on this assignment.
-If your lexer does not compile using Code::Blocks Version 16.01 on an NIC standard lab
-workstation, at least 50% of the total possible points on this assignment will be deducted from
-your score.
-You are required to do your own work for this assignment. Failure to comply will result a score
-of 0 for this homework.
-Your lexer must take its arguments from the commandline. Your lexer will be executed against all files shown above as follows assuming your lexer is named "lexer":
+Your lexer must compile and run using the supplied Makefile on an Ubuntu system equivalent to what is installed on the NIC lab laptops.
+There are 13 files. For every file that your lexer doesn't produce correct output you will lose 10% (at my discretion).
+Your lexer must take its arguments from the command line.
 
 ```
 lexer hello_world.ccx
@@ -291,33 +294,21 @@ expected output in the [ccx directory](ccx) of this repository.
 
 Do this using the Linux diff tool, showing the differences between your output and the expected output.
 A bash script that runs the entire test suite should be created for convenience. Making this part
-of you Makefile under a "test" rule is also recommended.
+of you Makefile under a "test" rule is also recommended. A sample Makefile is provided that does this.
 
 Your program will be evaluated for neatness and clarity as well as correctness. You must
-document your program using relevent comments. You must use a consistent programming style.
+document your program using relevant comments. You must use a consistent programming style.
 Using tools such as clang-format to enforce a style can be helpful.
 #### Hints
 Your lexer need only be tested against the source files listed in [Figure 7](#figure-7-test-source-files). 
 Each of these source files is legal CCX. Your lexer is not expected to be bullet proof, so don't spend time trying to handle the
 unbounded set of all legal and illegal CCX programs.
 
-You would do well to think of your lexer as a finite state machine that operates on a characterby-character basis. The set of states in such a machine will be relatively small.
+You would do well to think of your lexer as a finite state machine that operates on a character-by-character basis. The set of states in such a machine will be relatively small.
 
 Build your lexer incrementally according to the steps provided.
-
-For example, start off building a lexer that recognizes just
-keywords, and defaults to the UNK state. Then create a file containing just the CCX keywords,
-and test your lexer. Once it has been tested, add the ability to recognize CCX operators. Then
-create a file containing just keywords and operators and test your lexer. Continue in this fashion
-until your lexer is complete. If you take this approach, your lexer should end up containing a
-very small number of states.
-
 #### Submitting Your Project
-Your homework must be submitted using the Canvas website for the course. You must turn in
-only the source code for your lexer.
-
 Your lexer should be organized into multiple source files for clarity. Figure our a good
 naming convention and create an appropriate set of include files for prototypes.
 
 All code will be submitted to GitHub Canvas. Make sure that you use some sort sensible organization.
-

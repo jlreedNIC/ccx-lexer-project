@@ -70,11 +70,55 @@ $(BUILD_DIR)/%.cpp.o: %.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
 
+# Set things up for testing. Input and output directories
+OUT_DIR ?= out
+CCX_DIR ?= ccx
+
+# All of the .cci and ccx files
+LEXER_CCI_IN := $(wildcard $(CCX_DIR)/*.cci)
+LEXER_CCX_IN := $(wildcard $(CCX_DIR)/*.ccx)
+LEXER_IN := $(notdir $(LEXER_CCI_IN)) $(notdir $(LEXER_CCX_IN))
+
+# The files we want to generate.
+LEXER_OUT := $(LEXER_IN:%=$(OUT_DIR)/%.lexer.out)
+
+# The lexer.out files in the output directory depend on the LEXER_IN files
+# and the executable
+# We run out lexer, then run diff on the output.
+# Testing will stop on the first failure due to the return from diff
+# diff will output the differences so we can see what isn't working.
+$(OUT_DIR)/%.lexer.out: $(CCX_DIR)/%
+#	echo $(LEXER_IN)
+	echo $(BUILD_DIR)/$(TARGET_EXEC) $<
+	$(BUILD_DIR)/$(TARGET_EXEC) $<
+	diff -s $(OUT_DIR)/$(<F).lexer.out $(CCX_DIR)/$(<F).lexer.out  
+
+test1: $(OUT_DIR)/complex.cci.lexer.out\
+	$(OUT_DIR)/complex.ccx.lexer.out\
+	$(OUT_DIR)/list.cci.lexer.out\
+	$(OUT_DIR)/list.ccx.lexer.out\
+	$(OUT_DIR)/date.cci.lexer.out\
+	$(OUT_DIR)/date.ccx.lexer.out\
+	$(OUT_DIR)/natural.cci.lexer.out\
+	$(OUT_DIR)/natural.ccx.lexer.out\
+	$(OUT_DIR)/trie.cci.lexer.out\
+	$(OUT_DIR)/widget.ccx.lexer.out\
+	$(OUT_DIR)/widget.cci.lexer.out
+	echo "running tests"
+
+test: $(BUILD_DIR)/$(TARGET_EXEC) $(LEXER_OUT) 
+#	echo "That's better!"
+#	echo $(LEXER_OUT)
+
+testone:  $(BUILD_DIR)/$(TARGET_EXEC) $(OUT_DIR)/natural.ccx.lexer.out
+	
+
 # Only do clean explicitly. (make clean)
 .PHONY: clean
 
 clean:
 	$(RM) -r $(BUILD_DIR)
+	$(RM) -r $(OUT_DIR)
 
 -include $(DEPS)
 
