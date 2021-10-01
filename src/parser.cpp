@@ -32,9 +32,17 @@ Parser::~Parser()
 
 void Parser::parse()
 {
+    // read entire file
     while(!inFile.eof())
     {
         getChars();
+
+        lexeme = nextChar;
+
+        if(nextChar == '/' && secondChar == '*')
+        {
+            // found comment
+        }
     }
 
 }
@@ -45,7 +53,10 @@ void Parser::getChars()
     if(!inFile.eof())
     {
         inFile.get(nextChar);
-        inFile.get(secondChar);
+        secondChar = inFile.peek();
+        // inFile.get(secondChar);
+
+        std::cout << nextChar;// << secondChar;
     }
 }
 
