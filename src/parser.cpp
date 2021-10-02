@@ -1,13 +1,12 @@
 /**
  * @file parser.cpp
  * @author Jordan Reed (jlreed@students.nic.edu)
- * @brief 
- * @version 0.1
- * @date 2021-10-01
- * 
- * @copyright Copyright (c) 2021
+ * @date 10-01-21
+ * @class CS 210
+ * @brief Lexical analyzer program.
  * 
  */
+
 #include "parser.h"
 
 Parser::Parser()
@@ -24,7 +23,6 @@ Parser::Parser(const std::string &fileName)
         std::cerr << "Error opening file.\n";
         exit(1);
     }
-
     else std::cout << "Opened " << fileName << " file\n";
 
     // open output file
@@ -34,8 +32,7 @@ Parser::Parser(const std::string &fileName)
         std::cerr << "Could not open output file.\n";
         exit(1);
     }
-
-    std::cout << "Opened " << fileName << ".test.lexer.out file\n";
+    else std::cout << "Opened " << fileName << ".test.lexer.out file\n";
 }
 
 Parser::~Parser()
@@ -54,7 +51,6 @@ void Parser::parse()
     // check for what token it fits
         // go to that function
     // loop
-
 
     while(!inFile.eof())
     {
@@ -87,8 +83,6 @@ void Parser::parse()
                 getChars();
                 lexeme += currChar;
             } while (isLetter());
-            // getChars();
-            // lexeme += currChar;
 
             // getToken();
             token = " (placeholder)\n";            
@@ -110,8 +104,6 @@ void Parser::parse()
         if(currChar == ' ' || currChar == '\n')
         {
             // ignore space
-            // lexeme - currChar
-
             lexeme = "";
             token = "";
         }
@@ -122,61 +114,6 @@ void Parser::parse()
     }
 }
 
-// void Parser::parse()
-// {
-//     // currChar = ' ';
-//     // read entire file
-//     while(!inFile.eof())
-//     {
-//         getChars();
-//         token = "";
-//
-//         lexeme = currChar;
-//
-//         // comment
-//         if(currChar == '/' && nextChar == '*')
-//         {
-//             token = " (comment)";
-//
-//             do
-//             {
-//                 getChars();
-//                 lexeme += currChar;
-//             } while (currChar != '*' || nextChar != '/');
-//             getChars();
-//             lexeme += currChar;            
-//         }
-//
-//         // string
-//
-//         // word
-//         if(isLetter())
-//         {
-//             getChars();
-//             while(isLetter())
-//             {
-//                 // getChars();
-//                 lexeme += currChar;
-//                 getChars();
-//             }
-//             lexeme += currChar;
-//
-//             // findToken();
-//         }
-//
-//         lexeme += token;
-//         outputLexeme();
-//
-//         // ignore spaces
-//         // if(currChar != ' ' || currChar != '\n')
-//         // {
-//         //     lexeme = "";
-//         //     token = "";
-//         // }
-//     }
-//
-// }
-
 void Parser::getChars()
 {
     // FIX:why doesn't !inFile work?
@@ -184,9 +121,6 @@ void Parser::getChars()
     {
         inFile.get(currChar);
         nextChar = inFile.peek();
-        // inFile.get(nextChar);
-
-        // std::cout << currChar;// << nextChar;
     }
 }
 
@@ -195,18 +129,16 @@ void Parser::outputLexeme()
     outFile << lexeme;
 }
 
-//checks to see if currChar and nextChar is a letter
-// FIX: function needs work. Does not handle strings correctly
+// checks to see if currChar and nextChar are part of a word (an alphabet char or numeric char or '_')
 bool Parser::isLetter()
 {
     bool cLetter = (currChar >= 'a' && currChar <= 'z') || (currChar >= 'A' && currChar <= 'Z') || currChar == '_';
-    bool nLetter = (nextChar >= 'a' && nextChar <= 'z') || 
-                   (nextChar >= 'A' && nextChar <= 'Z') || 
-                    nextChar == '_' || 
-                   (nextChar >= '0' && nextChar <= '9');
+    bool nLetter = (nextChar >= 'a' && nextChar <= 'z') || (nextChar >= 'A' && nextChar <= 'Z') || 
+                    nextChar == '_' || (nextChar >= '0' && nextChar <= '9');
     return cLetter && nLetter;
 }
 
+// checks to see if currChar and nextChar are numbers
 bool Parser::isNumber()
 {
     bool cNumber = (currChar >= '0' && currChar <= '9');

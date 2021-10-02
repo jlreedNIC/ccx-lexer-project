@@ -1,19 +1,18 @@
 /**
  * @file parser.h
- * @author Jordan Reed
- * @brief Parser class. Class to parse out a ccx file
- * @date 2021-10-01
- * 
- * @class CS210
+ * @author Jordan Reed (jlreed@students.nic.edu)
+ * @date 10-01-21
+ * @class CS 210
+ * @brief Lexical analyzer program.
  * 
  */
+
 #ifndef PARSER_H
 #define PARSER_H
 
 #include <iostream>
 #include <fstream>
 #include <string>
-
 
 class Parser
 {
@@ -39,6 +38,5 @@ class Parser
                                 // checks if next char is a letter a-z or A-Z
         bool isNumber();
 };
-
 
 #endif
