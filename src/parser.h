@@ -20,11 +20,14 @@ class Parser
     private:
         std::string token;
         std::string lexeme;
-        char nextChar;          // next char
-        char secondChar;        // next next char
+        char currChar;          // next char
+        char nextChar;        // next next char
 
         std::fstream inFile;
         std::fstream outFile;
+
+        bool isLetter();        // helper function
+                                // checks if next char is a letter a-z or A-Z
 };
 
 
