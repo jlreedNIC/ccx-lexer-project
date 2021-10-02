@@ -1,3 +1,13 @@
+/**
+ * @file parser.cpp
+ * @author Jordan Reed (jlreed@students.nic.edu)
+ * @brief 
+ * @version 0.1
+ * @date 2021-10-01
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
 #include "parser.h"
 
 Parser::Parser()
@@ -46,6 +56,7 @@ void Parser::parse()
         getChars();
 
         lexeme = currChar;
+        token = "\n"; // reset token
 
         // comment
         if(currChar == '/' && nextChar == '*')
@@ -76,6 +87,18 @@ void Parser::parse()
 
             // getToken();
             token = " (placeholder)\n";            
+        }
+
+        // string
+        if(currChar == '\"')
+        {
+            do
+            {
+                getChars();
+                lexeme += currChar;
+            } while (currChar != '\"');
+
+            token = " (string)\n";            
         }
 
         // space

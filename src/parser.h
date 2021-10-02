@@ -1,3 +1,12 @@
+/**
+ * @file parser.h
+ * @author Jordan Reed
+ * @brief Parser class. Class to parse out a ccx file
+ * @date 2021-10-01
+ * 
+ * @class CS210
+ * 
+ */
 #ifndef PARSER_H
 #define PARSER_H
 
@@ -21,7 +30,7 @@ class Parser
         std::string token;
         std::string lexeme;
         char currChar;          // next char
-        char nextChar;        // next next char
+        char nextChar;          // next next char
 
         std::fstream inFile;
         std::fstream outFile;
