@@ -28,9 +28,14 @@ Parser::Parser(const std::string &fileName)
     else std::cout << "Opened " << fileName << " file\n";
 
     // open output file
-    outFile.open(fileName + ".lexer.out", std::ios::out);
+    outFile.open(fileName + ".test.lexer.out", std::ios::out);
+    if(!outFile)
+    {
+        std::cerr << "Could not open output file.\n";
+        exit(1);
+    }
 
-    std::cout << "Opened " << fileName << ".lexer.out file\n";
+    std::cout << "Opened " << fileName << ".test.lexer.out file\n";
 }
 
 Parser::~Parser()
@@ -194,7 +199,17 @@ void Parser::outputLexeme()
 // FIX: function needs work. Does not handle strings correctly
 bool Parser::isLetter()
 {
-    bool nLetter = (currChar >= 'a' && currChar <= 'z') || (currChar >= 'A' && currChar <= 'Z') || currChar == '_';
-    bool sLetter = (nextChar >= 'a' && nextChar <= 'z') || (nextChar >= 'A' && nextChar <= 'Z') || nextChar == '_';
-    return nLetter && sLetter;
+    bool cLetter = (currChar >= 'a' && currChar <= 'z') || (currChar >= 'A' && currChar <= 'Z') || currChar == '_';
+    bool nLetter = (nextChar >= 'a' && nextChar <= 'z') || 
+                   (nextChar >= 'A' && nextChar <= 'Z') || 
+                    nextChar == '_' || 
+                   (nextChar >= '0' && nextChar <= '9');
+    return cLetter && nLetter;
+}
+
+bool Parser::isNumber()
+{
+    bool cNumber = (currChar >= '0' && currChar <= '9');
+    bool nNumber = (nextChar >= '0' && nextChar <= '9');
+    return cNumber && nNumber;
 }
