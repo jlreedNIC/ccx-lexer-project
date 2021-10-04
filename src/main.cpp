@@ -8,7 +8,7 @@
  *        the contents to a new file, with .lexer.out appended to the file name.
  */
 
-#include "parser.h"
+#include "lexer.h"
 
 int main(int argc, char **argv)
 {
@@ -25,8 +25,8 @@ int main(int argc, char **argv)
         exit(1);
     }
 
-    Parser parser(argv[1]);
-    parser.parse();
+    Lexer lexer(argv[1]);
+    lexer.parse();
 
     return 0;
 }
