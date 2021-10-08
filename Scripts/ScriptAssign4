@@ -1,0 +1,177 @@
+Script started on 2021-10-08 11:44:26-07:00 [TERM="xterm-256color" TTY="/dev/pts/2" COLUMNS="187" LINES="11"]
+]0;jreed@DESKTOP-JB7PGQR: ~/cs210/ccx-lexer-jlreedNIC/src[01;32mjreed@DESKTOP-JB7PGQR[00m:[01;34m~/cs210/ccx-lexer-jlreedNIC/src[00m$ ./parser_exc widget.cci
+Error opening file.
+]0;jreed@DESKTOP-JB7PGQR: ~/cs210/ccx-lexer-jlreedNIC/src[01;32mjreed@DESKTOP-JB7PGQR[00m:[01;34m~/cs210/ccx-lexer-jlreedNIC/src[00m$ ./parser_exc widget.cci.widget.cci.widget.cci/widget.ccixwidget.ccixwidget.cci[1Pwidget.cci[1Pwidget.ccicwidget.ccicwidget.ccixwidget.cci/widget.cci
+Opened ../ccx/widget.cci file
+Opened ../ccx/widget.cci.test.lexer.out file
+Closed files.
+]0;jreed@DESKTOP-JB7PGQR: ~/cs210/ccx-lexer-jlreedNIC/src[01;32mjreed@DESKTOP-JB7PGQR[00m:[01;34m~/cs210/ccx-lexer-jlreedNIC/src[00m$ diff ../xx[K[Kccx/widget.cci.lexer.out ../ccx/widget.cci.le[K[Ktest.lexer.out -y
+module (keyword)					      |	module (placeholder)
+widget (identifier)					      |	widget (placeholder)
+interface (keyword)					      |	interface (placeholder)
+/*								/*
+     * types							     * types
+     */ (comment)						     */ (comment)
+type (keyword)						      |	type (placeholder)
+widget_type (identifier)				      |	widget_type (placeholder)
+; (operator)						      |	;
+subtype (keyword)					      |	subtype (placeholder)
+widget_width_type (identifier)				      |	widget_width_type (placeholder)
+is (keyword)						      |	is (placeholder)
+natural (keyword)					      |	natural (placeholder)
+range (keyword)						      |	range (placeholder)
+1 (numeric literal)					      |	1
+.. (operator)						      |	.
+255 (numeric literal)					      |	.
+; (operator)						      |	2
+subtype (keyword)					      |	5
+widget_height_type (identifier)				      |	5
+is (keyword)						      |	;
+natural (keyword)					      |	subtype (placeholder)
+range (keyword)						      |	widget_height_type (placeholder)
+1 (numeric literal)					      |	is (placeholder)
+.. (operator)						      |	natural (placeholder)
+128 (numeric literal)					      |	range (placeholder)
+; (operator)						      |	1
+							      >	.
+							      >	.
+							      >	1
+							      >	2
+							      >	8
+							      >	;
+/*								/*
+     * routines							     * routines
+     */ (comment)						     */ (comment)
+function (keyword)					      |	function (placeholder)
+width (identifier)					      |	width (placeholder)
+( (operator)						      |	(
+w (identifier)						      |	w
+: (operator)						      |	:
+widget_type (identifier)				      |	widget_type (placeholder)
+) (operator)						      |	)
+return (keyword)					      |	return (placeholder)
+widget_width_type (identifier)				      |	widget_width_type (placeholder)
+; (operator)						      |	;
+accessor (keyword)					      |	accessor (placeholder)
+width (identifier)					      |	width (placeholder)
+( (operator)						      |	(
+w (identifier)						      |	w
+: (operator)						      |	:
+widget_type (identifier)				      |	widget_type (placeholder)
+) (operator)						      |	)
+return (keyword)					      |	return (placeholder)
+widget_width_type (identifier)				      |	widget_width_type (placeholder)
+; (operator)						      |	;
+function (keyword)					      |	function (placeholder)
+height (identifier)					      |	height (placeholder)
+( (operator)						      |	(
+w (identifier)						      |	w
+: (operator)						      |	:
+widget_type (identifier)				      |	widget_type (placeholder)
+) (operator)						      |	)
+return (keyword)					      |	return (placeholder)
+widget_height_type (identifier)				      |	widget_height_type (placeholder)
+; (operator)						      |	;
+accessor (keyword)					      |	accessor (placeholder)
+height (identifier)					      |	height (placeholder)
+( (operator)						      |	(
+w (identifier)						      |	w
+: (operator)						      |	:
+widget_type (identifier)				      |	widget_type (placeholder)
+) (operator)						      |	)
+return (keyword)					      |	return (placeholder)
+widget_height_type (identifier)				      |	widget_height_type (placeholder)
+; (operator)						      |	;
+function (keyword)					      |	function (placeholder)
+area (identifier)					      |	area (placeholder)
+( (operator)						      |	(
+lhs (identifier)					      |	lhs (placeholder)
+: (operator)						      |	:
+widget_type (identifier)				      |	widget_type (placeholder)
+; (operator)						      |	;
+rhs (identifier)					      |	rhs (placeholder)
+: (operator)						      |	:
+widget_type (identifier)				      |	widget_type (placeholder)
+) (operator)						      |	)
+return (keyword)					      |	return (placeholder)
+widget_type (identifier)				      |	widget_type (placeholder)
+; (operator)						      |	;
+mutator (keyword)					      |	mutator (placeholder)
+merge (identifier)					      |	merge (placeholder)
+( (operator)						      |	(
+lhs (identifier)					      |	lhs (placeholder)
+: (operator)						      |	:
+widget_type (identifier)				      |	widget_type (placeholder)
+; (operator)						      |	;
+rhs (identifier)					      |	rhs (placeholder)
+: (operator)						      |	:
+widget_type (identifier)				      |	widget_type (placeholder)
+) (operator)						      |	)
+; (operator)						      |	;
+end (keyword)						      |	end (placeholder)
+widget (identifier)					      |	widget (placeholder)
+; (operator)						      |	;
+]0;jreed@DESKTOP-JB7PGQR: ~/cs210/ccx-lexer-jlreedNIC/src[01;32mjreed@DESKTOP-JB7PGQR[00m:[01;34m~/cs210/ccx-lexer-jlreedNIC/src[00m$ diff ../ccx/widget.cci.lexer.out ../ccx/widget.cci.test.lexer.out -y[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K./parser_exc ../ccx/widget.cci[7Pwidget.ccicode .[K./parser_exc widget.cci../ccx/widget.cci[K[K[K[K[K[K[K[K[K[Khello_world.ccx
+Opened ../ccx/hello_world.ccx file
+Opened ../ccx/hello_world.ccx.test.lexer.out file
+Closed files.
+]0;jreed@DESKTOP-JB7PGQR: ~/cs210/ccx-lexer-jlreedNIC/src[01;32mjreed@DESKTOP-JB7PGQR[00m:[01;34m~/cs210/ccx-lexer-jlreedNIC/src[00m$ diff ../ccx/hellow[K_word[Kld.ccx.lexer.out ../ccx/hello_world.ccx.test.lexer.out -y
+/*								/*
+ * Hello world with args.					 * Hello world with args.
+ */ (comment)							 */ (comment)
+procedure (keyword)					      |	procedure (placeholder)
+main (identifier)					      |	main (placeholder)
+( (operator)						      |	(
+argc (identifier)					      |	argc (placeholder)
+: (operator)						      |	:
+integer (keyword)					      |	integer (placeholder)
+; (operator)						      |	;
+argv (identifier)					      |	argv (placeholder)
+: (operator)						      |	:
+string_vector_type (identifier)				      |	string_vector_type (placeholder)
+) (operator)						      |	)
+is (keyword)						      |	is (placeholder)
+begin (keyword)						      |	begin (placeholder)
+printf (identifier)					      |	printf (placeholder)
+( (operator)						      |	(
+"Hello, world\n" (string)					"Hello, world\n" (string)
+) (operator)						      |	)
+; (operator)						      |	;
+loop (keyword)						      |	loop (placeholder)
+argc (identifier)					      |	argc (placeholder)
+:= (operator)						      |	:
+argc (identifier)					      |	=
+- (operator)						      |	argc (placeholder)
+1 (numeric literal)					      |	-
+; (operator)						      |	1
+exit (keyword)						      |	;
+when (keyword)						      |	exit (placeholder)
+( (operator)						      |	when (placeholder)
+argc (identifier)					      |	(
+= (operator)						      |	argc (placeholder)
+0 (numeric literal)					      |	=
+) (operator)						      |	0
+; (operator)						      |	)
+printf (identifier)					      |	;
+( (operator)						      |	printf (placeholder)
+							      >	(
+"arg[%d]: %s\n" (string)					"arg[%d]: %s\n" (string)
+, (operator)						      |	,
+argc (identifier)					      |	argc (placeholder)
+, (operator)						      |	,
+argv (identifier)					      |	argv (placeholder)
+[ (operator)						      |	[
+argc (identifier)					      |	argc (placeholder)
+] (operator)						      |	]
+) (operator)						      |	)
+; (operator)						      |	;
+end (keyword)						      |	end (placeholder)
+loop (keyword)						      |	loop (placeholder)
+; (operator)						      |	;
+end (keyword)						      |	end (placeholder)
+main (identifier)					      |	main (placeholder)
+; (operator)						      |	;
+]0;jreed@DESKTOP-JB7PGQR: ~/cs210/ccx-lexer-jlreedNIC/src[01;32mjreed@DESKTOP-JB7PGQR[00m:[01;34m~/cs210/ccx-lexer-jlreedNIC/src[00m$ exit
+exit
+
+Script done on 2021-10-08 11:48:48-07:00 [COMMAND_EXIT_CODE="1"]
