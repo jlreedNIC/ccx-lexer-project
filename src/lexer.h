@@ -37,6 +37,9 @@ class Lexer
         bool isLetter();        // helper function
                                 // checks if next char is a letter a-z or A-Z
         bool isNumber();
+
+        void getToken();
+        bool isKeyword();
 };
 
 #endif
