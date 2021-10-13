@@ -18,6 +18,10 @@ $(EXEC) : $(OBJ_FILES)/main.o $(OBJ_FILES)/lexer.o
 	mkdir -p $(DEST_FILES)
 	$(CXX) $(CXXFLAGS) $< $(OBJ_FILES)/lexer.o -o $@
 
+$(OBJ_FILES)/main.o : src/lexer.h
+
+$(OBJ_FILES)/lexer.o : src/lexer.h
+
 
 # Test
 IN_DIR = ccx
@@ -25,7 +29,7 @@ IN_DIR = ccx
 # Pattern rule for running program and checking differences
 $(IN_DIR)/%.test.lexer.out : $(IN_DIR)/%
 	$(EXEC) $<
-	diff $@ $<.lexer.out -s
+	diff $<.lexer.out $@ -s
 	mv $@ $(DEST_FILES)
 
 test: $(IN_DIR)/complex.cci.test.lexer.out\
