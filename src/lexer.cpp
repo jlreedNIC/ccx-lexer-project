@@ -84,8 +84,8 @@ void Lexer::lex()
                 lexeme += currChar;
             } while (isLetter());
 
-            // getToken();
-            token = " (placeholder)\n";            
+            getToken();
+            // token = " (placeholder)\n";            
         }
 
         // string
@@ -115,9 +115,11 @@ void Lexer::lex()
     }
 }
 
+// gets the next char and peeks at the char after
 void Lexer::getChars()
 {
     // FIX:why doesn't !inFile work?
+    // just use inFile
     if(!inFile.eof())
     {
         inFile.get(currChar);
@@ -125,12 +127,14 @@ void Lexer::getChars()
     }
 }
 
+// outputs lexeme to outfile
 void Lexer::outputLexeme()
 {
     outFile << lexeme;
 }
 
 // checks to see if currChar and nextChar are part of a word (an alphabet char or numeric char or '_')
+// does not work for single chars
 bool Lexer::isLetter()
 {
     bool cLetter = (currChar >= 'a' && currChar <= 'z') || (currChar >= 'A' && currChar <= 'Z') || currChar == '_';
@@ -145,4 +149,52 @@ bool Lexer::isNumber()
     bool cNumber = (currChar >= '0' && currChar <= '9');
     bool nNumber = (nextChar >= '0' && nextChar <= '9');
     return cNumber && nNumber;
+}
+
+// returns the correct token based on if the lexeme is a keyword
+void Lexer::getToken()
+{
+    if(isKeyword()) 
+    {
+        token = " (keyword)\n";
+    }
+    else token = " (identifier)\n";
+}
+
+// checks to see if the lexeme is a keyword
+bool Lexer::isKeyword()
+{
+    // find better way to do keywords
+    // maybe read into vector from file?
+    std::string keywords[] = {"accessor", "and", "array", "begin", "bool", "case", 
+                              "character", "constant", "else", "elsif", "end", "exit", 
+                              "function", "if", "in", "integer", "interface", "is", 
+                              "loop", "module", "mutator", "natural", "null", "of", "or", 
+                              "others", "out", "positive", "procedure", "range", "return",
+                              "struct", "subtype", "then", "type", "when", "while"};
+
+    bool found = false;
+    int i = 0;
+
+    for(i=0; i<37; i++)
+    {
+        if(lexeme == keywords[i])
+        {
+            found = true;
+            break;
+        }
+    }
+    // while(*keywords != "\0" && !found)
+    // {
+    //     std::cout << keywords[i] << "\n";
+    //     if(lexeme == keywords[i])
+    //     {
+    //         found = true;
+    //     }
+    //     else i++;
+    // }
+
+    
+    return found;
+
 }
