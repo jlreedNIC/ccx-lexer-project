@@ -74,17 +74,27 @@ void Lexer::lex()
             token = " (comment)\n";
         }
 
-        // word
-        if(isLetter())
+        if(isSingleChar())
         {
-            // getWord();
-            do
+            getToken();
+            std::cout << lexeme << token;
+        }
+        // word
+        if(isWordPart() || isSingleChar())
+        {
+            if(!isSingleChar())
             {
-                getChars();
-                lexeme += currChar;
-            } while (isLetter());
+                // getWord();
+                do
+                {
+                    getChars();
+                    lexeme += currChar;
+                    
+                } while (isWordPart());
+            }
 
             getToken();
+            // std::cout << lexeme << token;
             // token = " (placeholder)\n";            
         }
 
@@ -133,9 +143,31 @@ void Lexer::outputLexeme()
     outFile << lexeme;
 }
 
+
+// FIX: implement this part better
+bool Lexer::isSingleChar()
+{
+    
+    bool cChar = (currChar >= 'a' && currChar <= 'z') || (currChar >= 'A' && currChar <= 'Z');
+    // nChar is not a letter or _ or a number
+    bool nChar = !((nextChar >= 'a' && nextChar <= 'z') || (nextChar >= 'A' && nextChar <= 'Z')
+                  || nextChar == '_' || (nextChar >= '0' && nextChar <= '9')); // implement isLetter(char)
+
+    return cChar && nChar;
+}
 // checks to see if currChar and nextChar are part of a word (an alphabet char or numeric char or '_')
 // does not work for single chars
+// maybe do isLetter and isWordPart
+// bool isLetter(char) ? check for single chars?
+// bool isSingleChar()
 bool Lexer::isLetter()
+{
+    
+    return (currChar >= 'a' && currChar <= 'z') || (currChar >= 'A' && currChar <= 'Z') || currChar == '_';
+}
+
+// checks with currChar and nextChar to see if the currChar is part of a 'word'
+bool Lexer::isWordPart()
 {
     bool cLetter = (currChar >= 'a' && currChar <= 'z') || (currChar >= 'A' && currChar <= 'Z') || currChar == '_';
     bool nLetter = (nextChar >= 'a' && nextChar <= 'z') || (nextChar >= 'A' && nextChar <= 'Z') || 
