@@ -74,13 +74,8 @@ void Lexer::lex()
             token = " (comment)\n";
         }
 
-        if(isSingleChar())
-        {
-            getToken();
-            std::cout << lexeme << token;
-        }
         // word
-        if(isWordPart() || isSingleChar())
+        if(isLetter())
         {
             if(!isSingleChar())
             {
@@ -93,9 +88,7 @@ void Lexer::lex()
                 } while (isWordPart());
             }
 
-            getToken();
-            // std::cout << lexeme << token;
-            // token = " (placeholder)\n";            
+            getToken();      
         }
 
         // string
@@ -128,9 +121,7 @@ void Lexer::lex()
 // gets the next char and peeks at the char after
 void Lexer::getChars()
 {
-    // FIX:why doesn't !inFile work?
-    // just use inFile
-    if(!inFile.eof())
+    if(inFile)
     {
         inFile.get(currChar);
         nextChar = inFile.peek();
@@ -145,25 +136,23 @@ void Lexer::outputLexeme()
 
 
 // FIX: implement this part better
+// checks to see if currChar is a letter and nextChar is not an alphanumeric character
 bool Lexer::isSingleChar()
 {
     
-    bool cChar = (currChar >= 'a' && currChar <= 'z') || (currChar >= 'A' && currChar <= 'Z');
+    bool cChar = isLetter();
+
     // nChar is not a letter or _ or a number
     bool nChar = !((nextChar >= 'a' && nextChar <= 'z') || (nextChar >= 'A' && nextChar <= 'Z')
                   || nextChar == '_' || (nextChar >= '0' && nextChar <= '9')); // implement isLetter(char)
 
     return cChar && nChar;
 }
-// checks to see if currChar and nextChar are part of a word (an alphabet char or numeric char or '_')
-// does not work for single chars
-// maybe do isLetter and isWordPart
-// bool isLetter(char) ? check for single chars?
-// bool isSingleChar()
+
+// checks to see if currChar is a letter
 bool Lexer::isLetter()
 {
-    
-    return (currChar >= 'a' && currChar <= 'z') || (currChar >= 'A' && currChar <= 'Z') || currChar == '_';
+    return (currChar >= 'a' && currChar <= 'z') || (currChar >= 'A' && currChar <= 'Z');// || currChar == '_';
 }
 
 // checks with currChar and nextChar to see if the currChar is part of a 'word'
@@ -184,6 +173,8 @@ bool Lexer::isNumber()
 }
 
 // returns the correct token based on if the lexeme is a keyword
+// think about implementing this to return correct token for every lexeme, 
+// not just keywords and identifiers
 void Lexer::getToken()
 {
     if(isKeyword()) 
@@ -196,8 +187,9 @@ void Lexer::getToken()
 // checks to see if the lexeme is a keyword
 bool Lexer::isKeyword()
 {
-    // find better way to do keywords
+    // FIX: find better way to do keywords
     // maybe read into vector from file?
+    // or just use a vector
     std::string keywords[] = {"accessor", "and", "array", "begin", "bool", "case", 
                               "character", "constant", "else", "elsif", "end", "exit", 
                               "function", "if", "in", "integer", "interface", "is", 
@@ -216,17 +208,6 @@ bool Lexer::isKeyword()
             break;
         }
     }
-    // while(*keywords != "\0" && !found)
-    // {
-    //     std::cout << keywords[i] << "\n";
-    //     if(lexeme == keywords[i])
-    //     {
-    //         found = true;
-    //     }
-    //     else i++;
-    // }
 
-    
     return found;
-
 }
