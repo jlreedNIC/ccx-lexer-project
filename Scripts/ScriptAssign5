@@ -1,0 +1,472 @@
+Script started on 2021-10-15 13:43:12-07:00 [TERM="xterm-256color" TTY="/dev/pts/2" COLUMNS="187" LINES="11"]
+
+$$ make
+mkdir -p obj
+g++ -std=c++17 -Wall -Wextra -pedantic -pedantic-errors -c src/main.cpp -o obj/main.o
+mkdir -p obj
+g++ -std=c++17 -Wall -Wextra -pedantic -pedantic-errors -c src/lexer.cpp -o obj/lexer.o
+mkdir -p dest
+g++ -std=c++17 -Wall -Wextra -pedantic -pedantic-errors obj/main.o obj/lexer.o -o dest/parser_exc
+$$ make et[K[Ktest
+dest/parser_exc ccx/complex.cci
+diff ccx/complex.cci.lexer.out ccx/complex.cci.test.lexer.out -s
+Files ccx/complex.cci.lexer.out and ccx/complex.cci.test.lexer.out are identical
+mv ccx/complex.cci.test.lexer.out dest
+dest/parser_exc ccx/complex.ccx
+diff ccx/complex.ccx.lexer.out ccx/complex.ccx.test.lexer.out -s
+Files ccx/complex.ccx.lexer.out and ccx/complex.ccx.test.lexer.out are identical
+mv ccx/complex.ccx.test.lexer.out dest
+dest/parser_exc ccx/date.cci
+diff ccx/date.cci.lexer.out ccx/date.cci.test.lexer.out -s
+49c49
+< 1 (numeric literal)
+---
+> 1
+51c51,52
+< 31 (numeric literal)
+---
+> 3
+> 1
+58c59
+< 0 (numeric literal)
+---
+> 0
+60c61,62
+< 23 (numeric literal)
+---
+> 2
+> 3
+67c69
+< 0 (numeric literal)
+---
+> 0
+69c71,72
+< 59 (numeric literal)
+---
+> 5
+> 9
+76c79
+< 0 (numeric literal)
+---
+> 0
+78c81,82
+< 59 (numeric literal)
+---
+> 5
+> 9
+85c89
+< 0 (numeric literal)
+---
+> 0
+87c91,93
+< 999 (numeric literal)
+---
+> 9
+> 9
+> 9
+make: [makefile:32: ccx/date.cci.test.lexer.out] Error 1 (ignored)
+mv ccx/date.cci.test.lexer.out dest
+dest/parser_exc ccx/date.ccx
+diff ccx/date.ccx.lexer.out ccx/date.ccx.test.lexer.out -s
+12c12,15
+< 1970 (numeric literal)
+---
+> 1
+> 9
+> 7
+> 0
+24c27
+< 1 (numeric literal)
+---
+> 1
+30c33
+< 0 (numeric literal)
+---
+> 0
+36c39
+< 0 (numeric literal)
+---
+> 0
+42c45
+< 0 (numeric literal)
+---
+> 0
+48c51
+< 0 (numeric literal)
+---
+> 0
+160c163
+< 4 (numeric literal)
+---
+> 4
+163c166
+< 0 (numeric literal)
+---
+> 0
+174c177,179
+< 100 (numeric literal)
+---
+> 1
+> 0
+> 0
+177c182
+< 0 (numeric literal)
+---
+> 0
+188c193,195
+< 400 (numeric literal)
+---
+> 4
+> 0
+> 0
+191c198
+< 0 (numeric literal)
+---
+> 0
+554c561,562
+< 30 (numeric literal)
+---
+> 3
+> 0
+572c580,581
+< 29 (numeric literal)
+---
+> 2
+> 9
+578c587,588
+< 28 (numeric literal)
+---
+> 2
+> 8
+589c599,600
+< 31 (numeric literal)
+---
+> 3
+> 1
+make: [makefile:32: ccx/date.ccx.test.lexer.out] Error 1 (ignored)
+mv ccx/date.ccx.test.lexer.out dest
+dest/parser_exc ccx/hello_world.ccx
+diff ccx/hello_world.ccx.lexer.out ccx/hello_world.ccx.test.lexer.out -s
+27c27
+< 1 (numeric literal)
+---
+> 1
+34c34
+< 0 (numeric literal)
+---
+> 0
+make: [makefile:32: ccx/hello_world.ccx.test.lexer.out] Error 1 (ignored)
+mv ccx/hello_world.ccx.test.lexer.out dest
+dest/parser_exc ccx/list.cci
+diff ccx/list.cci.lexer.out ccx/list.cci.test.lexer.out -s
+Files ccx/list.cci.lexer.out and ccx/list.cci.test.lexer.out are identical
+mv ccx/list.cci.test.lexer.out dest
+dest/parser_exc ccx/list.ccx
+diff ccx/list.ccx.lexer.out ccx/list.ccx.test.lexer.out -s
+629c629
+< 0 (numeric literal)
+---
+> 0
+654c654
+< 1 (numeric literal)
+---
+> 1
+make: [makefile:32: ccx/list.ccx.test.lexer.out] Error 1 (ignored)
+mv ccx/list.ccx.test.lexer.out dest
+dest/parser_exc ccx/natural.cci
+diff ccx/natural.cci.lexer.out ccx/natural.cci.test.lexer.out -s
+Files ccx/natural.cci.lexer.out and ccx/natural.cci.test.lexer.out are identical
+mv ccx/natural.cci.test.lexer.out dest
+dest/parser_exc ccx/natural.ccx
+diff ccx/natural.ccx.lexer.out ccx/natural.ccx.test.lexer.out -s
+135c135
+< 0 (numeric literal)
+---
+> 0
+184c184
+< 0 (numeric literal)
+---
+> 0
+make: [makefile:32: ccx/natural.ccx.test.lexer.out] Error 1 (ignored)
+mv ccx/natural.ccx.test.lexer.out dest
+dest/parser_exc ccx/trie.cci
+diff ccx/trie.cci.lexer.out ccx/trie.cci.test.lexer.out -s
+24c24,27
+< 4096 (numeric literal)
+---
+> 4
+> 0
+> 9
+> 6
+37c40
+< 1 (numeric literal)
+---
+> 1
+make: [makefile:32: ccx/trie.cci.test.lexer.out] Error 1 (ignored)
+mv ccx/trie.cci.test.lexer.out dest
+dest/parser_exc ccx/trie.ccx
+diff ccx/trie.ccx.lexer.out ccx/trie.ccx.test.lexer.out -s
+9c9,10
+< 27 (numeric literal)
+---
+> 2
+> 7
+34c35
+< 0 (numeric literal)
+---
+> 0
+78c79
+< 1 (numeric literal)
+---
+> 1
+100c101
+< 1 (numeric literal)
+---
+> 1
+122c123,125
+< 'a' (character literal)
+---
+> '
+> a (identifier)
+> '
+131c134,136
+< 'z' (character literal)
+---
+> '
+> z (identifier)
+> '
+140c145,147
+< 'A' (character literal)
+---
+> '
+> A (identifier)
+> '
+148c155,157
+< 'a' (character literal)
+---
+> '
+> a (identifier)
+> '
+158c167
+< 1 (numeric literal)
+---
+> 1
+205c214
+< 0 (numeric literal)
+---
+> 0
+248c257
+< 1 (numeric literal)
+---
+> 1
+254c263
+< 0 (numeric literal)
+---
+> 0
+261c270,272
+< 'A' (character literal)
+---
+> '
+> A (identifier)
+> '
+263c274
+< 1 (numeric literal)
+---
+> 1
+268c279
+< 0 (numeric literal)
+---
+> 0
+385c396
+< 1 (numeric literal)
+---
+> 1
+387c398
+< 1 (numeric literal)
+---
+> 1
+443c454
+< 0 (numeric literal)
+---
+> 0
+450c461,463
+< 'A' (character literal)
+---
+> '
+> A (identifier)
+> '
+452c465
+< 1 (numeric literal)
+---
+> 1
+457c470
+< 0 (numeric literal)
+---
+> 0
+542c555
+< 0 (numeric literal)
+---
+> 0
+549c562,564
+< 'A' (character literal)
+---
+> '
+> A (identifier)
+> '
+551c566
+< 1 (numeric literal)
+---
+> 1
+556c571
+< 0 (numeric literal)
+---
+> 0
+592c607
+< 1 (numeric literal)
+---
+> 1
+705c720
+< 0 (numeric literal)
+---
+> 0
+723c738
+< 1 (numeric literal)
+---
+> 1
+make: [makefile:32: ccx/trie.ccx.test.lexer.out] Error 1 (ignored)
+mv ccx/trie.ccx.test.lexer.out dest
+dest/parser_exc ccx/widget.cci
+diff ccx/widget.cci.lexer.out ccx/widget.cci.test.lexer.out -s
+15c15
+< 1 (numeric literal)
+---
+> 1
+17c17,19
+< 255 (numeric literal)
+---
+> 2
+> 5
+> 5
+24c26
+< 1 (numeric literal)
+---
+> 1
+26c28,30
+< 128 (numeric literal)
+---
+> 1
+> 2
+> 8
+make: [makefile:32: ccx/widget.cci.test.lexer.out] Error 1 (ignored)
+mv ccx/widget.cci.test.lexer.out dest
+dest/parser_exc ccx/widget.ccx
+diff ccx/widget.ccx.lexer.out ccx/widget.ccx.test.lexer.out -s
+36c36,41
+< 16#40# (numeric literal)
+---
+> 1
+> 6
+> #
+> 4
+> 0
+> #
+44c49
+< 5 (numeric literal)
+---
+> 5
+55c60,62
+< 128 (numeric literal)
+---
+> 1
+> 2
+> 8
+63c70
+< 5 (numeric literal)
+---
+> 5
+71c78,80
+< 256 (numeric literal)
+---
+> 2
+> 5
+> 6
+79c88,90
+< 133 (numeric literal)
+---
+> 1
+> 3
+> 3
+87c98,100
+< 259 (numeric literal)
+---
+> 2
+> 5
+> 9
+112c125,127
+< 100 (numeric literal)
+---
+> 1
+> 0
+> 0
+123c138
+< 1 (numeric literal)
+---
+> 1
+168c183
+< 3 (numeric literal)
+---
+> 3
+174c189,190
+< 17 (numeric literal)
+---
+> 1
+> 7
+186c202
+< 3 (numeric literal)
+---
+> 3
+194c210
+< 2 (numeric literal)
+---
+> 2
+201c217,218
+< 37 (numeric literal)
+---
+> 3
+> 7
+213c230
+< 0 (numeric literal)
+---
+> 0
+220c237,239
+< 'x' (character literal)
+---
+> '
+> x (identifier)
+> '
+224c243,244
+< 23 (numeric literal)
+---
+> 2
+> 3
+227c247,249
+< 'q' (character literal)
+---
+> '
+> q (identifier)
+> '
+231c253,254
+< 91 (numeric literal)
+---
+> 9
+> 1
+239c262
+< 1 (numeric literal)
+---
+> 1
+make: [makefile:32: ccx/widget.ccx.test.lexer.out] Error 1 (ignored)
+mv ccx/widget.ccx.test.lexer.out dest
+$$ exit
+exit
+
+Script done on 2021-10-15 13:43:27-07:00 [COMMAND_EXIT_CODE="0"]
