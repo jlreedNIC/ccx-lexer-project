@@ -23,7 +23,7 @@ Lexer::Lexer(const std::string &fileName)
         std::cerr << "Error opening file.\n";
         exit(1);
     }
-    else std::cout << "Opened " << fileName << " file\n";
+    // else std::cout << "Opened " << fileName << " file\n";
 
     // open output file
     outFile.open(fileName + ".test.lexer.out", std::ios::out);
@@ -32,7 +32,7 @@ Lexer::Lexer(const std::string &fileName)
         std::cerr << "Could not open output file.\n";
         exit(1);
     }
-    else std::cout << "Opened " << fileName << ".test.lexer.out file\n";
+    // else std::cout << "Opened " << fileName << ".test.lexer.out file\n";
 }
 
 Lexer::~Lexer()
@@ -41,7 +41,7 @@ Lexer::~Lexer()
     inFile.close();
     outFile.close();
 
-    std::cout << "Closed files.\n";
+    // std::cout << "Closed files.\n";
 }
 
 void Lexer::lex()
@@ -75,7 +75,7 @@ void Lexer::lex()
         }
 
         // word
-        if(isLetter())
+        else if(isLetter())
         {
             if(!isSingleChar())
             {
@@ -92,7 +92,7 @@ void Lexer::lex()
         }
 
         // string
-        if(currChar == '\"')
+        else if(currChar == '\"')
         {
             // getString();
             do
@@ -104,8 +104,14 @@ void Lexer::lex()
             token = " (string)\n";            
         }
 
+        // operator
+        else if(isOpStart())
+        {
+            getOperator();
+        }
+
         // space
-        if(currChar == ' ' || currChar == '\n')
+        else if(currChar == ' ' || currChar == '\n')
         {
             // ignore space
             lexeme = "";
@@ -170,6 +176,42 @@ bool Lexer::isNumber()
     bool cNumber = (currChar >= '0' && currChar <= '9');
     bool nNumber = (nextChar >= '0' && nextChar <= '9');
     return cNumber && nNumber;
+}
+
+// checks to see if currChar is the start of an operator
+bool Lexer::isOpStart()
+{
+    char ops[] = {'.', '<', '>', '(', ')', '+', '-', '*', '/', '|', '&', ';', ',', ':',
+                  '[', ']', '=', '!'};
+    bool found = false;
+
+    for(int i=0; i<18; i++)
+    {
+        if(currChar == ops[i])
+        {
+            found = true;
+            break;
+        }
+    }
+
+    return found;
+}
+
+// checks nextChar to see if it's an operator. if it is, then it adds it to the lexeme
+// sets token to operator
+void Lexer::getOperator()
+{
+    // check next char
+    // if next char is op
+        // get next char
+    // set lexeme and token
+    if(nextChar == '=' || nextChar == '.' || nextChar == '<' || nextChar == '>' || nextChar == '*')
+    {
+        getChars();
+        lexeme += currChar;
+    }
+
+    token = " (operator)\n";
 }
 
 // returns the correct token based on if the lexeme is a keyword
