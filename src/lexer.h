@@ -21,7 +21,7 @@ class Lexer
         Lexer(const std::string &fileName);    // constructor with file name
         ~Lexer();                              // default destructor
 
-        void lex();               // main parsing function
+        void lex();                 // main parsing function
         void getChars();            // gets next char and one after
         void outputLexeme();        // outputs lexeme and token to out file
 
@@ -34,18 +34,25 @@ class Lexer
         std::fstream inFile;
         std::fstream outFile;
 
-        bool isSingleChar();
-        bool isLetter();        // helper function
-                                // checks if next char is a letter a-z or A-Z
-        bool isWordPart();
+        bool isCommentStart();      // checks to see if start of a comment, /*
+        void getComment();          // gets comment into lexeme and sets token
 
-        bool isNumber();
+        bool isSingleChar();        // checks if currChar is a single char
+        bool isLetter();            // checks if currChar is a letter a-z or A-Z
+        bool isWordPart();          // checks if currChar is part of a valid word (including nums and special chars)
+        void getWord();             // gets word into lexeme
+        bool isKeyword();           // checks if word matches any keywords
+        void getToken();            // sets token to keyword or identifier
 
-        bool isOpStart();
-        void getOperator();
+        bool isStringStart();       // checks for start of string "
+        void getString();           // puts whole string into lexeme and sets token
 
-        void getToken();
-        bool isKeyword();
+        bool isNumber();            // checks for a number
+
+        bool isOpStart();           // checks for start of an operator, or a single operator
+        void getOperator();         // gets operator (even if double char) and puts into lexeme and sets token
+
+        
 };
 
 #endif

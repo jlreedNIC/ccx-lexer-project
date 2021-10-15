@@ -60,48 +60,21 @@ void Lexer::lex()
         token = "\n"; // reset token
 
         // comment
-        if(currChar == '/' && nextChar == '*')
+        if(isCommentStart())
         {
-            // getComment();
-            do
-            {
-                getChars();
-                lexeme += currChar;
-            } while (currChar != '*' || nextChar != '/');
-            getChars();
-            lexeme += currChar;
-
-            token = " (comment)\n";
+            getComment();
         }
 
         // word
         else if(isLetter())
         {
-            if(!isSingleChar())
-            {
-                // getWord();
-                do
-                {
-                    getChars();
-                    lexeme += currChar;
-                    
-                } while (isWordPart());
-            }
-
-            getToken();      
+            getWord();    
         }
 
         // string
-        else if(currChar == '\"')
+        else if(isStringStart())
         {
-            // getString();
-            do
-            {
-                getChars();
-                lexeme += currChar;
-            } while (currChar != '\"');
-
-            token = " (string)\n";            
+            getString();                      
         }
 
         // operator
@@ -140,6 +113,25 @@ void Lexer::outputLexeme()
     outFile << lexeme;
 }
 
+// checks for /*
+bool Lexer::isCommentStart()
+{
+    return currChar == '/' && nextChar == '*';
+}
+
+// puts whole comment into lexeme
+void Lexer::getComment()
+{
+    do
+    {
+        getChars();
+        lexeme += currChar;
+    } while (currChar != '*' || nextChar != '/');
+    getChars();
+    lexeme += currChar;
+
+    token = " (comment)\n";
+}
 
 // FIX: implement this part better
 // checks to see if currChar is a letter and nextChar is not an alphanumeric character
@@ -168,6 +160,80 @@ bool Lexer::isWordPart()
     bool nLetter = (nextChar >= 'a' && nextChar <= 'z') || (nextChar >= 'A' && nextChar <= 'Z') || 
                     nextChar == '_' || (nextChar >= '0' && nextChar <= '9');
     return cLetter && nLetter;
+}
+
+// puts whole word into lexeme
+void Lexer::getWord()
+{
+    if(!isSingleChar())
+    {
+        do
+        {
+            getChars();
+            lexeme += currChar;
+                    
+        } while (isWordPart());
+    }
+
+    getToken();
+}
+
+// checks to see if the lexeme is a keyword
+bool Lexer::isKeyword()
+{
+    // FIX: find better way to do keywords
+    // maybe read into vector from file?
+    // or just use a vector
+    std::string keywords[] = {"accessor", "and", "array", "begin", "bool", "case", 
+                              "character", "constant", "else", "elsif", "end", "exit", 
+                              "function", "if", "in", "integer", "interface", "is", 
+                              "loop", "module", "mutator", "natural", "null", "of", "or", 
+                              "others", "out", "positive", "procedure", "range", "return",
+                              "struct", "subtype", "then", "type", "when", "while"};
+
+    bool found = false;
+    int i = 0;
+
+    for(i=0; i<37; i++)
+    {
+        if(lexeme == keywords[i])
+        {
+            found = true;
+            break;
+        }
+    }
+
+    return found;
+}
+
+// returns the correct token based on if the lexeme is a keyword
+// think about implementing this to return correct token for every lexeme, 
+// not just keywords and identifiers
+void Lexer::getToken()
+{
+    if(isKeyword()) 
+    {
+        token = " (keyword)\n";
+    }
+    else token = " (identifier)\n";
+}
+
+// checks for ""
+bool Lexer::isStringStart()
+{
+    return currChar == '\"';
+}
+
+// puts whole string into lexeme
+void Lexer::getString()
+{
+    do
+    {
+        getChars();
+        lexeme += currChar;
+    } while (currChar != '\"');
+
+    token = " (string)\n";  
 }
 
 // checks to see if currChar and nextChar are numbers
@@ -212,44 +278,4 @@ void Lexer::getOperator()
     }
 
     token = " (operator)\n";
-}
-
-// returns the correct token based on if the lexeme is a keyword
-// think about implementing this to return correct token for every lexeme, 
-// not just keywords and identifiers
-void Lexer::getToken()
-{
-    if(isKeyword()) 
-    {
-        token = " (keyword)\n";
-    }
-    else token = " (identifier)\n";
-}
-
-// checks to see if the lexeme is a keyword
-bool Lexer::isKeyword()
-{
-    // FIX: find better way to do keywords
-    // maybe read into vector from file?
-    // or just use a vector
-    std::string keywords[] = {"accessor", "and", "array", "begin", "bool", "case", 
-                              "character", "constant", "else", "elsif", "end", "exit", 
-                              "function", "if", "in", "integer", "interface", "is", 
-                              "loop", "module", "mutator", "natural", "null", "of", "or", 
-                              "others", "out", "positive", "procedure", "range", "return",
-                              "struct", "subtype", "then", "type", "when", "while"};
-
-    bool found = false;
-    int i = 0;
-
-    for(i=0; i<37; i++)
-    {
-        if(lexeme == keywords[i])
-        {
-            found = true;
-            break;
-        }
-    }
-
-    return found;
 }
