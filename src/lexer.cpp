@@ -78,12 +78,23 @@ void Lexer::lex()
             getString();                      
         }
 
+        // character literal
+        else if(isCharLitStart())
+        {
+            getCharLit();
+        }
+
         // operator
         else if(isOpStart())
         {
             getOperator();
         }
 
+        // numeric literal
+        else if(isNumStart())
+        {
+            getNumLit();
+        }
         // space
         else if(currChar == ' ' || currChar == '\n')
         {
@@ -237,12 +248,64 @@ void Lexer::getString()
     token = " (string)\n";  
 }
 
+// checks for '
+bool Lexer::isCharLitStart()
+{
+    return currChar == '\'';
+}
+
+// puts whole char literal into lexeme
+void Lexer::getCharLit()
+{
+    do
+    {
+        getChars();
+        lexeme += currChar;
+    } while (currChar != '\'');
+    
+    token = " (character literal)\n";
+}
+
 // checks to see if currChar and nextChar are numbers
-bool Lexer::isNumber()
+bool Lexer::isNumStart()
 {
     bool cNumber = (currChar >= '0' && currChar <= '9');
-    bool nNumber = (nextChar >= '0' && nextChar <= '9');
-    return cNumber && nNumber;
+    // bool nNumber = (nextChar >= '0' && nextChar <= '9');
+    return cNumber;
+}
+
+bool Lexer::isNumPart()
+{
+    bool cNum = isNumStart() || currChar == '#';// || (currChar >= 'A' && currChar <= 'F') || currChar == '.' || currChar == '#';
+    bool nNum = (nextChar >= '0' && nextChar <= '9') || (nextChar >= 'A' && nextChar <= 'F') || nextChar == '.' || nextChar == '#';
+
+    return cNum && nNum;
+}
+
+// FIX: does not handle 99..99 case
+void Lexer::getNumLit()
+{
+    // peek at char after nextChar to make sure not ".." operator
+    char nextNextChar;
+    if(inFile)
+    {
+        inFile.get(currChar);
+        nextNextChar = inFile.peek();
+        inFile.putback(currChar);
+    }
+
+    bool notOperator = nextChar != '.' && nextNextChar != '.';
+
+    if(notOperator)
+    {
+        while(isNumPart())
+        {
+            getChars();
+            lexeme += currChar;
+        }        
+    }
+    
+    token = " (numeric literal)\n";
 }
 
 // checks to see if currChar is the start of an operator

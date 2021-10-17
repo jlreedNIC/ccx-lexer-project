@@ -47,7 +47,12 @@ class Lexer
         bool isStringStart();       // checks for start of string "
         void getString();           // puts whole string into lexeme and sets token
 
-        bool isNumber();            // checks for a number
+        bool isCharLitStart();
+        void getCharLit();
+
+        bool isNumStart();            // checks for a number
+        bool isNumPart();
+        void getNumLit();
 
         bool isOpStart();           // checks for start of an operator, or a single operator
         void getOperator();         // gets operator (even if double char) and puts into lexeme and sets token
