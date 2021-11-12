@@ -3,7 +3,7 @@
  * @author Jordan Reed (jlreed@students.nic.edu)
  * @date 10-01-21
  * @class CS 210
- * @brief Lexical analyzer program.
+ * @brief Definition file for Lexer class and lexical analyzer program.
  * 
  */
 
@@ -28,8 +28,8 @@ class Lexer
     private:
         std::string token;
         std::string lexeme;
-        char currChar;          // next char
-        char nextChar;          // next next char
+        char currChar;              // next char
+        char nextChar;              // next next char
 
         std::fstream inFile;
         std::fstream outFile;
@@ -47,12 +47,12 @@ class Lexer
         bool isStringStart();       // checks for start of string "
         void getString();           // puts whole string into lexeme and sets token
 
-        bool isCharLitStart();
-        void getCharLit();
+        bool isCharLitStart();      // checks for a char literal '
+        void getCharLit();          // puts the char literal into the lexeme and sets token
 
-        bool isNumStart();            // checks for a number
-        bool isNumPart();
-        void getNumLit();
+        bool isNumStart();          // checks for a number
+        bool isNumPart();           // checks to see if part of a number
+        void getNumLit();           // puts the whole number into lexeme and sets token
 
         bool isOpStart();           // checks for start of an operator, or a single operator
         void getOperator();         // gets operator (even if double char) and puts into lexeme and sets token

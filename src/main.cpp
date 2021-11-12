@@ -3,12 +3,11 @@
  * @author Jordan Reed (jlreed@students.nic.edu)
  * @date 10-01-21
  * @class CS 210
- * @brief Start of Lexical Analyzer program.
- *        Program currently takes a file given through the command line and copies
- *        the contents to a new file, with .lexer.out appended to the file name.
+ * @brief A lexical analyzer program.
  */
 
 #include "lexer.h"
+#include <iostream>
 
 int main(int argc, char **argv)
 {
