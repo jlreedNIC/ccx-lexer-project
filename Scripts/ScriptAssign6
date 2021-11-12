@@ -1,0 +1,58 @@
+Script started on 2021-11-11 23:34:53-08:00
+$ make test
+dest/parser_exc ccx/complex.cci
+diff ccx/complex.cci.lexer.out ccx/complex.cci.test.lexer.out -s
+Files ccx/complex.cci.lexer.out and ccx/complex.cci.test.lexer.out are identical
+mv ccx/complex.cci.test.lexer.out dest
+dest/parser_exc ccx/complex.ccx
+diff ccx/complex.ccx.lexer.out ccx/complex.ccx.test.lexer.out -s
+Files ccx/complex.ccx.lexer.out and ccx/complex.ccx.test.lexer.out are identical
+mv ccx/complex.ccx.test.lexer.out dest
+dest/parser_exc ccx/date.cci
+diff ccx/date.cci.lexer.out ccx/date.cci.test.lexer.out -s
+Files ccx/date.cci.lexer.out and ccx/date.cci.test.lexer.out are identical
+mv ccx/date.cci.test.lexer.out dest
+dest/parser_exc ccx/date.ccx
+diff ccx/date.ccx.lexer.out ccx/date.ccx.test.lexer.out -s
+Files ccx/date.ccx.lexer.out and ccx/date.ccx.test.lexer.out are identical
+mv ccx/date.ccx.test.lexer.out dest
+dest/parser_exc ccx/hello_world.ccx
+diff ccx/hello_world.ccx.lexer.out ccx/hello_world.ccx.test.lexer.out -s
+Files ccx/hello_world.ccx.lexer.out and ccx/hello_world.ccx.test.lexer.out are identical
+mv ccx/hello_world.ccx.test.lexer.out dest
+dest/parser_exc ccx/list.cci
+diff ccx/list.cci.lexer.out ccx/list.cci.test.lexer.out -s
+Files ccx/list.cci.lexer.out and ccx/list.cci.test.lexer.out are identical
+mv ccx/list.cci.test.lexer.out dest
+dest/parser_exc ccx/list.ccx
+diff ccx/list.ccx.lexer.out ccx/list.ccx.test.lexer.out -s
+Files ccx/list.ccx.lexer.out and ccx/list.ccx.test.lexer.out are identical
+mv ccx/list.ccx.test.lexer.out dest
+dest/parser_exc ccx/natural.cci
+diff ccx/natural.cci.lexer.out ccx/natural.cci.test.lexer.out -s
+Files ccx/natural.cci.lexer.out and ccx/natural.cci.test.lexer.out are identical
+mv ccx/natural.cci.test.lexer.out dest
+dest/parser_exc ccx/natural.ccx
+diff ccx/natural.ccx.lexer.out ccx/natural.ccx.test.lexer.out -s
+Files ccx/natural.ccx.lexer.out and ccx/natural.ccx.test.lexer.out are identical
+mv ccx/natural.ccx.test.lexer.out dest
+dest/parser_exc ccx/trie.cci
+diff ccx/trie.cci.lexer.out ccx/trie.cci.test.lexer.out -s
+Files ccx/trie.cci.lexer.out and ccx/trie.cci.test.lexer.out are identical
+mv ccx/trie.cci.test.lexer.out dest
+dest/parser_exc ccx/trie.ccx
+diff ccx/trie.ccx.lexer.out ccx/trie.ccx.test.lexer.out -s
+Files ccx/trie.ccx.lexer.out and ccx/trie.ccx.test.lexer.out are identical
+mv ccx/trie.ccx.test.lexer.out dest
+dest/parser_exc ccx/widget.cci
+diff ccx/widget.cci.lexer.out ccx/widget.cci.test.lexer.out -s
+Files ccx/widget.cci.lexer.out and ccx/widget.cci.test.lexer.out are identical
+mv ccx/widget.cci.test.lexer.out dest
+dest/parser_exc ccx/widget.ccx
+diff ccx/widget.ccx.lexer.out ccx/widget.ccx.test.lexer.out -s
+Files ccx/widget.ccx.lexer.out and ccx/widget.ccx.test.lexer.out are identical
+mv ccx/widget.ccx.test.lexer.out dest
+$ exit
+exit
+
+Script done on 2021-11-11 23:35:02-08:00
