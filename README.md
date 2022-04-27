@@ -1,5 +1,8 @@
 # ccx-parser
-This is a lexical analyzer. This project was used as a final project for the CS 210 Programming Languages class at NIC. Project is complete, and no further development is planned.
+This is a lexical analyzer. This project was used as a final project for the CS 210 Programming Languages class at NIC. 
+
+## Development Status
+Project is complete, and no further development is planned.
 
 ## Project Requirements
 This project will require you to write a lexical analyzer program.  You may use C or C++. You will use a Makefile to build the program. A Makefile is provided as a starting point. It may or may not be sufficient for the entire project, but should give you a solid starting point. The requirements for this project are [here](ccx_parser_spec.md)
