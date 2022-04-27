@@ -1,3 +1,5 @@
+# Makefile given by instructor. Not used in final project.
+
 # From https://spin.atomicobject.com/2016/08/26/makefile-c-projects/
 
 # The directory to build in. 
